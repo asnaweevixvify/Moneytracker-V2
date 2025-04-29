@@ -92,6 +92,11 @@ function callBgFour(){
 btnAdd.addEventListener('click',addToHistory)
 
 function addToHistory(){
+  Swal.fire({
+    title:  `<h3>เพิ่มรายการสำเร็จ<h3>`,
+    icon: "success",
+    draggable: true
+  });
   if(selected.value === 'earn'){
     earnArr.push({
       date:dateType.value,
@@ -102,10 +107,10 @@ function addToHistory(){
       listAddEarn.classList.add('itemlist')
       listAddEarn.id='earnlist'
       listAddEarn.innerHTML=`
-            <li>${earnArr[countEarn].date}</li>
-            <li>${earnArr[countEarn].name}</li>
-            <li>${earnArr[countEarn].money}</li>
-            <li>${earnArr[countEarn].cat}</li>
+            <li class="list">${earnArr[countEarn].date}</li>
+            <li class="list">${earnArr[countEarn].name}</li>
+            <li class="list">${earnArr[countEarn].money}</li>
+            <li class="list">${earnArr[countEarn].cat}</li>
       `
       if(earnMoneyTotalEl.innerText==='0฿'){
         earnMoneyTotal = moneyType.value
@@ -119,8 +124,6 @@ function addToHistory(){
       callBgTwo()
   }
   else{
-    payMoneyTotal+=moneyType.value
-    payMoneyTotalEl.innerHTML=`${payMoneyTotal}฿`
     payArr.push({
       date:dateType.value,
       name:nameType.value,
@@ -130,20 +133,27 @@ function addToHistory(){
       listAddPay.classList.add('itemlist')
       listAddPay.id='paylist'
       listAddPay.innerHTML=`
-            <li>${payArr[countPay].date}</li>
-            <li>${payArr[countPay].name}</li>
-            <li>${payArr[countPay].money}</li>
-            <li>${payArr[countPay].cat}</li>
+            <li class="list">${payArr[countPay].date}</li>
+            <li class="list">${payArr[countPay].name}</li>
+            <li class="list">${payArr[countPay].money}</li>
+            <li class="list">${payArr[countPay].cat}</li>
       `
+      if(payMoneyTotalEl.innerText==='0฿'){
+        payMoneyTotal = moneyType.value
+      }
+      else{
+        
+      }
+      payMoneyTotalEl.innerHTML=`${payMoneyTotal}฿`
       bgThree.appendChild(listAddPay)
       countPay++
       callBgThree()
       
   }
-  selected.value = ''
+  selected.value = 'none'
   dateType.value = ''
   nameType.value = ''
   moneyType.value = ''
-  catType.value = ''
+  catType.value = 'none'
 }
 

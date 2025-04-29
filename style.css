@@ -7,6 +7,9 @@ h1,h2{
     font-family: "Kanit";
     font-weight: 400;
 }
+h3{
+    font-weight: 400;
+}
 .bg1{
     display: flex;
     flex-direction: column;
@@ -29,10 +32,13 @@ ul{
 }
 li{
     font-family: "Kanit";
-    font-weight: 400;
+    font-weight: 450;
     font-size: 25px;
     margin-top: 10px;
     cursor: pointer;
+}
+.list{
+    font-weight: 400;
 }
 .header{
     display: flex;
