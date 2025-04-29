@@ -1,0 +1,208 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+h1,h2{
+    font-family: "Kanit";
+    font-weight: 400;
+}
+.bg1{
+    display: flex;
+    flex-direction: column;
+}
+.bg2{
+    display: none;
+    flex-direction: column;
+}
+.bg3{
+    display: none;
+    flex-direction: column;
+}
+.bg4{
+    display: none;
+}
+ul{
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+li{
+    font-family: "Kanit";
+    font-weight: 400;
+    font-size: 25px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 370px;
+    padding-right: 370px;
+    padding-top: 40px;
+}
+.line1{
+    width: 62%;
+    height: 4px;
+    background-color: gray;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    opacity: 0.2;
+}
+.earnpaycontain{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+.earncontain,.paycontain{
+    background-color: #f8f8f8;
+    padding-left: 30px;
+    padding-right: 250px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    box-shadow: 1px 1px 1px gray;
+}
+.chart-container{
+    width: 900px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    background-color: #f8f8f8;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    box-shadow: 1px 1px 1px gray;
+
+}
+.addbtn{
+    display: flex;
+    width: 180px;
+    font-family: "Kanit";
+    font-weight: 400;
+    border: 1px solid transparent;
+    background-color: #0097ff;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    color: white;
+    margin-left: 1230px;
+    margin-top: 20px;
+}
+.btnadd{
+    display: flex;
+    width: 180px;
+    font-family: "Kanit";
+    font-weight: 400;
+    border: 1px solid transparent;
+    background-color: #0097ff;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    color: white;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+.topiclist li, .itemlist li {
+    flex: 1; 
+    text-align: center; 
+}
+.topiclist{
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    background-color: #fcfcfc;
+    border: 3px solid #faf8f8;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.itemlist{
+    display: flex;
+    text-align: center;
+    border: 3px solid #faf8f8;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -17px;
+}
+.typecontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #fcfcfc;
+    border: 3px solid #faf8f8;
+    border-radius: 5px;
+    padding: 70px;
+}
+
+.earnpaytopic,
+.datetype,
+.nametype,
+.moneytext,
+.topictext {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.earnpaytopic h2,
+.datetype h2,
+.nametype h2,
+.moneytext h2,
+.topictext h2 {
+    width: 140px;
+    margin: 0;
+    font-size: 22px;
+}
+
+.earnpaytopic input[type="radio"] {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.earnpaytopic h2:nth-child(2),
+.earnpaytopic h2:nth-child(4) {
+    width: auto;
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+.datetype input,
+.nametype input,
+.moneytext input,
+.topictext select {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+.earnpaytopic select {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
