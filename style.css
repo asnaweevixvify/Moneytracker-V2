@@ -7,8 +7,11 @@ h1,h2{
     font-family: "Kanit";
     font-weight: 400;
 }
-h3{
+h3,h4{
     font-weight: 400;
+}
+h4{
+    font-size: 15px;
 }
 .bg1{
     display: flex;

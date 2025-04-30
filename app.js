@@ -144,7 +144,7 @@ function showListEarn() {
     <li class="list">${earnArr[countEarn].name}</li>
     <li class="list">${earnArr[countEarn].money}</li>
     <li class="list">${earnArr[countEarn].cat}</li>
-    <li class="list"><i class="fa-solid fa-trash " style="color: #ff0000;"></i></li>
+    <li class="list"><i class="fa-solid fa-trash " style="color: #ff0000;" id="delbtnEarn"></i></li>
   `;
   bgTwo.appendChild(listAddEarn);
   countEarn++;
@@ -160,7 +160,7 @@ function showListPay() {
     <li class="list">${payArr[countPay].name}</li>
     <li class="list">${payArr[countPay].money}</li>
     <li class="list">${payArr[countPay].cat}</li>
-    <li class="list"><i class="fa-solid fa-trash" style="color: #ff0000;"></i></li>
+    <li class="list"><i class="fa-solid fa-trash" style="color: #ff0000;" id="delbtnPay"></i></li>
   `;
   bgThree.appendChild(listAddPay);
   countPay++;
@@ -193,4 +193,60 @@ function calPay() {
   }
   payMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
   updateChart()
+}
+
+bgTwo.addEventListener('click', function (e) {
+  if (e.target && e.target.id === 'delbtnEarn') {
+    delListEarn(e);
+  }
+});
+
+bgThree.addEventListener('click', function (e) {
+  if (e.target && e.target.id === 'delbtnPay') {
+    delListPay(e);
+  }
+});
+
+function delListEarn(e) {
+  const targetItem = e.target.closest('ul');
+  if (targetItem) {
+    Swal.fire({
+      title: `<h3>คุณต้องการจะลบรายการนี้หรือไม่<h3>`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText:`ลบ`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        targetItem.remove();
+        Swal.fire({
+          title: `<h3>ลบรายการสำเร็จ<h3>`,
+          icon: "success"
+        });
+      }
+    });
+  }
+}
+
+function delListPay(e) {
+  const targetItem = e.target.closest('ul');
+  if (targetItem) {
+    Swal.fire({
+      title: `<h3>คุณต้องการจะลบรายการนี้หรือไม่<h3>`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText:`ลบ`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        targetItem.remove();
+        Swal.fire({
+          title: `<h3>ลบรายการสำเร็จ<h3>`,
+          icon: "success"
+        });
+      }
+    });
+  }
 }
