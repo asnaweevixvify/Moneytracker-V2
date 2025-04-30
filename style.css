@@ -8,6 +8,7 @@ h1,h2{
     font-weight: 400;
 }
 h3,h4{
+    font-family: "Kanit";
     font-weight: 400;
 }
 h4{
@@ -228,4 +229,32 @@ i{
 .itemlist li {
   flex: 1;
   text-align: center;
+}
+.bg2 select{
+    display: flex;
+    width: 160px;
+    font-family: "Kanit";
+    font-weight: 400;
+    margin-left: auto;
+    margin-right: 120px;
+}
+.bg2 h4{
+    text-align: right;
+    margin-right: 120px;
+    font-size: 20px;
+    margin-top: -80px;
+}
+.bg3 select{
+    display: flex;
+    width: 160px;
+    font-family: "Kanit";
+    font-weight: 400;
+    margin-left: auto;
+    margin-right: 120px;
+}
+.bg3 h4{
+    text-align: right;
+    margin-right: 120px;
+    font-size: 20px;
+    margin-top: -80px;
 }

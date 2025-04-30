@@ -18,11 +18,11 @@ let earnList = document.getElementById('earnlist');
 let payList = document.getElementById('paylist');
 let earnMoneyTotalEl = document.getElementById('earntotal');
 let payMoneyTotalEl = document.getElementById('paytotal');
+let filterSelectEarn = document.getElementById('monthEarn')
+let filterSelectPay = document.getElementById('monthPay')
 
 let earnMoneyTotal = 0;
 let payMoneyTotal = 0;
-let currentMoneyEarn = 0;
-let currentMoneyPay = 0;
 let earnArr = [];
 let payArr = [];
 
@@ -173,7 +173,6 @@ function showListEarn(index) {
     <li class="list"><i class="fa-solid fa-trash " style="color: #ff0000;" id="delbtnEarn"></i></li>
   `;
   bgTwo.appendChild(listAddEarn);
-  countEarn++;
   callBgTwo();
   saveMode()
 }
@@ -191,7 +190,6 @@ function showListPay(index) {
     <li class="list"><i class="fa-solid fa-trash" style="color: #ff0000;" id="delbtnPay"></i></li>
   `;
   bgThree.appendChild(listAddPay);
-  countPay++;
   callBgThree();
   saveMode()
 }
@@ -309,4 +307,39 @@ function saveMode(){
   localStorage.setItem('payArrSave',JSON.stringify(payArr))
   localStorage.setItem('earnTotalSave',earnMoneyTotal)
   localStorage.setItem('payTotalSave',payMoneyTotal)
+}
+
+filterSelectEarn.addEventListener('change',filterEarnMode)
+filterSelectPay.addEventListener('change',filterPayMode)
+
+function filterEarnMode(){
+  const listEarnAll = bgTwo.querySelectorAll('ul#earnlist')
+  let monthSelect = Number(filterSelectEarn.value)
+  listEarnAll.forEach((e)=>{
+    let dateInner = e.firstElementChild.innerText
+    let dateNew  = new Date(dateInner)
+    let monthInner = dateNew.getMonth()
+    if (monthInner === monthSelect) {
+      e.style.display = 'flex'; 
+    }
+    else {
+      e.style.display = 'none';
+    }
+  })
+}
+
+function filterPayMode(){
+  const listPayAll = bgThree.querySelectorAll('ul#paylist')
+  let monthSelect = Number(filterSelectPay.value)
+  listPayAll.forEach((e)=>{
+    let dateInner = e.firstElementChild.innerText
+    let dateNew  = new Date(dateInner)
+    let monthInner = dateNew.getMonth()
+    if (monthInner === monthSelect) {
+      e.style.display = 'flex'; 
+    }
+    else {
+      e.style.display = 'none';
+    }
+  })
 }
