@@ -37,6 +37,12 @@ li{
     margin-top: 10px;
     cursor: pointer;
 }
+.header li{
+    transition: transform 0.3s ease;
+}
+.header li:hover {
+    transform: scale(1.1);
+}
 .list{
     font-weight: 400;
 }
@@ -211,4 +217,12 @@ li{
     font-size: 18px;
     border: 1px solid #ccc;
     border-radius: 6px;
+}
+i{
+    cursor: pointer;
+}
+.topiclist li,
+.itemlist li {
+  flex: 1;
+  text-align: center;
 }
