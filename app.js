@@ -25,12 +25,36 @@ let currentMoneyEarn = 0;
 let currentMoneyPay = 0;
 let earnArr = [];
 let payArr = [];
-let countPay = 0;
-let countEarn = 0;
+
 let listAddEarn;
 let listAddPay;
 let myChart;
 const ctx = document.getElementById('myChart');
+
+window.onload=function(){
+  earnArr = JSON.parse(localStorage.getItem('earnArrSave')) || []
+  payArr  = JSON.parse(localStorage.getItem('payArrSave')) || []
+  earnMoneyTotal = parseInt(localStorage.getItem('earnTotalSave'))|| 0;
+  payMoneyTotal = parseInt(localStorage.getItem('payTotalSave'))|| 0;
+  countEarn =  earnArr.length;
+  countPay = payArr.length;
+
+  if (earnArr.length > 0) {
+    for (let i = 0; i < earnArr.length; i++) {
+      showListEarn(i);
+    }
+  }
+
+  if (payArr.length > 0) {
+    for (let i = 0; i < payArr.length; i++) {
+      showListPay(i);
+    }
+  }
+  updateChart()
+  earnMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
+  payMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
+  callBgOne()
+}
 
 function updateChart(){
   if (myChart) {
@@ -119,8 +143,7 @@ function addToHistory() {
       money: moneyType.value,
       cat: catType.value
     });
-    console.log(earnArr);
-    showListEarn();
+    showListEarn(earnArr.length - 1);
     calEarn();
     resetDisplay();
   } else {
@@ -130,42 +153,47 @@ function addToHistory() {
       money: moneyType.value,
       cat: catType.value
     });
-    showListPay();
+    showListPay(payArr.length - 1);
     calPay();
     resetDisplay();
+    saveMode()
   }
 }
 
-function showListEarn() {
+function showListEarn(index) {
+  const item = earnArr[index];
   listAddEarn = document.createElement('ul');
   listAddEarn.classList.add('itemlist');
   listAddEarn.id = 'earnlist';
   listAddEarn.innerHTML = `
-    <li class="list">${earnArr[countEarn].date}</li>
-    <li class="list">${earnArr[countEarn].name}</li>
-    <li class="list">${earnArr[countEarn].money}</li>
-    <li class="list">${earnArr[countEarn].cat}</li>
+    <li class="list">${item.date}</li>
+    <li class="list">${item.name}</li>
+    <li class="list">${item.money}</li>
+    <li class="list">${item.cat}</li>
     <li class="list"><i class="fa-solid fa-trash " style="color: #ff0000;" id="delbtnEarn"></i></li>
   `;
   bgTwo.appendChild(listAddEarn);
   countEarn++;
   callBgTwo();
+  saveMode()
 }
 
-function showListPay() {
+function showListPay(index) {
+  const item = payArr[index];
   listAddPay = document.createElement('ul');
   listAddPay.classList.add('itemlist');
   listAddPay.id = 'paylist';
   listAddPay.innerHTML = `
-    <li class="list">${payArr[countPay].date}</li>
-    <li class="list">${payArr[countPay].name}</li>
-    <li class="list">${payArr[countPay].money}</li>
-    <li class="list">${payArr[countPay].cat}</li>
+    <li class="list">${ item.date}</li>
+    <li class="list">${ item.name}</li>
+    <li class="list">${ item.money}</li>
+    <li class="list">${ item.cat}</li>
     <li class="list"><i class="fa-solid fa-trash" style="color: #ff0000;" id="delbtnPay"></i></li>
   `;
   bgThree.appendChild(listAddPay);
   countPay++;
   callBgThree();
+  saveMode()
 }
 
 function resetDisplay() {
@@ -184,6 +212,7 @@ function calEarn() {
   }
   earnMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
   updateChart()
+  saveMode()
 }
 
 function calPay() {
@@ -194,6 +223,7 @@ function calPay() {
   }
   payMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
   updateChart()
+  saveMode()
 }
 
 bgTwo.addEventListener('click', function (e) {
@@ -226,6 +256,11 @@ function delListEarn(e) {
         earnMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
         updateChart()
         targetItem.remove();
+        const delList = earnArr.findIndex(u=>
+          u.date===targetAll[0].innerText && u.name===targetAll[1].innerText && u.money === targetAll[2].innerText 
+        )
+        earnArr.splice(delList,1)
+        countEarn--
         Swal.fire({
           title: `<h3>ลบรายการสำเร็จ<h3>`,
           icon: "success"
@@ -233,6 +268,7 @@ function delListEarn(e) {
       }
     });
   }
+  saveMode()
 }
 
 function delListPay(e) {
@@ -253,6 +289,11 @@ function delListPay(e) {
         payMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
         updateChart()
         targetItem.remove();
+        const delList = payArr.findIndex(u=>
+          u.date===targetAll[0].innerText && u.name===targetAll[1].innerText && u.money === targetAll[2].innerText 
+        )
+        payArr.splice(delList,1)
+        countPay--
         Swal.fire({
           title: `<h3>ลบรายการสำเร็จ<h3>`,
           icon: "success"
@@ -260,4 +301,12 @@ function delListPay(e) {
       }
     });
   }
+  saveMode()
+}
+
+function saveMode(){
+  localStorage.setItem('earnArrSave',JSON.stringify(earnArr))
+  localStorage.setItem('payArrSave',JSON.stringify(payArr))
+  localStorage.setItem('earnTotalSave',earnMoneyTotal)
+  localStorage.setItem('payTotalSave',payMoneyTotal)
 }
