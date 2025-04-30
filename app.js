@@ -261,6 +261,7 @@ function delListEarn(e) {
         )
         earnArr.splice(delList,1)
         countEarn--
+        saveMode()
         Swal.fire({
           title: `<h3>ลบรายการสำเร็จ<h3>`,
           icon: "success"
@@ -268,7 +269,6 @@ function delListEarn(e) {
       }
     });
   }
-  saveMode()
 }
 
 function delListPay(e) {
@@ -294,6 +294,7 @@ function delListPay(e) {
         )
         payArr.splice(delList,1)
         countPay--
+        saveMode()
         Swal.fire({
           title: `<h3>ลบรายการสำเร็จ<h3>`,
           icon: "success"
@@ -301,7 +302,6 @@ function delListPay(e) {
       }
     });
   }
-  saveMode()
 }
 
 function saveMode(){
