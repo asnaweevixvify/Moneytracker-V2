@@ -119,6 +119,7 @@ function addToHistory() {
       money: moneyType.value,
       cat: catType.value
     });
+    console.log(earnArr);
     showListEarn();
     calEarn();
     resetDisplay();
@@ -219,6 +220,11 @@ function delListEarn(e) {
       confirmButtonText:`ลบ`
     }).then((result) => {
       if (result.isConfirmed) {
+        let targetAll = targetItem.querySelectorAll('li');
+        let delMoney = parseInt(targetAll[2].innerText)
+        earnMoneyTotal -= delMoney
+        earnMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
+        updateChart()
         targetItem.remove();
         Swal.fire({
           title: `<h3>ลบรายการสำเร็จ<h3>`,
@@ -241,6 +247,11 @@ function delListPay(e) {
       confirmButtonText:`ลบ`
     }).then((result) => {
       if (result.isConfirmed) {
+        let targetAll = targetItem.querySelectorAll('li');
+        let delMoney = parseInt(targetAll[2].innerText)
+        payMoneyTotal -= delMoney
+        payMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
+        updateChart()
         targetItem.remove();
         Swal.fire({
           title: `<h3>ลบรายการสำเร็จ<h3>`,
