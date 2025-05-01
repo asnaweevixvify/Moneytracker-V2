@@ -262,6 +262,9 @@ i{
     display: none;
 }
 @media(max-width:450px){
+    * {
+        box-sizing: border-box;
+      }
     body{
         display: flex;
         flex-direction: column;
@@ -282,19 +285,20 @@ i{
         flex-direction: column;
         align-items: center;
         gap: 20px;
-        transform: translateX(250%);
+        transform: translateX(100%);
+        right: 0;
         position: fixed;
         transition: transform 0.3s ease-in-out;
         background-color: black;
-        width: 190px;
+        width: 40%;
         height: 100%;
         margin-top: -30px;
         color: white;
-        padding-right: 60px;
+        padding-right: 20px;
         padding-top: 80px;
     }
     .header.open ul {
-        transform: translateX(55%);
+        transform: translateX(0%);
       }
     .header.open i{
         color: white;
