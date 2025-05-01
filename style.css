@@ -290,7 +290,7 @@ i{
         position: fixed;
         transition: transform 0.3s ease-in-out;
         background-color: black;
-        width: 40%;
+        width: 50%;
         height: 100%;
         margin-top: -30px;
         color: white;
@@ -314,7 +314,7 @@ i{
         margin-top: 10px;
     }
     .addbtn{
-        margin-left: 170px;
+        margin-left: 150px;
         margin-top: 120px;
         margin-bottom: 40px;
     }
