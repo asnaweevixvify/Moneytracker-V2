@@ -1,2 +1,3 @@
-<h2>Demo Website Below</h2>
-<a href="https://moneytrackv2.netlify.app/"><h1>Click here</h1></a>
+## 🚀 Demo Website
+
+👉 [Click here to visit the demo website](https://moneytrackv2.netlify.app/)
