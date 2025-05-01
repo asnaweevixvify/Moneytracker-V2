@@ -9,6 +9,7 @@ const bgFour = document.getElementById('bg4');
 const topicText = document.getElementById('topictext');
 const addNewBtn = document.getElementById('addnewbtn');
 const btnAdd = document.getElementById('btnadd');
+const navToggle = document.getElementById('navToggle')
 let selected = document.getElementById('select');
 let dateType = document.getElementById('datetype');
 let nameType = document.getElementById('nametype');
@@ -20,6 +21,7 @@ let earnMoneyTotalEl = document.getElementById('earntotal');
 let payMoneyTotalEl = document.getElementById('paytotal');
 let filterSelectEarn = document.getElementById('monthEarn')
 let filterSelectPay = document.getElementById('monthPay')
+const header = document.querySelector('.header');
 
 let earnMoneyTotal = 0;
 let payMoneyTotal = 0;
@@ -98,6 +100,7 @@ function callBgOne() {
   bgThree.style.display = 'none';
   bgFour.style.display = 'none';
   topicText.innerText = 'บันทึกรายรับรายจ่าย';
+  header.classList.remove('open')
 }
 
 function callBgTwo() {
@@ -106,6 +109,7 @@ function callBgTwo() {
   bgThree.style.display = 'none';
   bgFour.style.display = 'none';
   topicText.innerText = 'รายการรายรับ';
+  header.classList.remove('open')
 }
 
 function callBgThree() {
@@ -114,6 +118,7 @@ function callBgThree() {
   bgThree.style.display = 'flex';
   bgFour.style.display = 'none';
   topicText.innerText = 'รายการรายจ่าย';
+  header.classList.remove('open')
 }
 
 function callBgFour() {
@@ -122,6 +127,7 @@ function callBgFour() {
   bgThree.style.display = 'none';
   bgFour.style.display = 'flex';
   topicText.innerText = 'เพิ่มรายการ';
+  header.classList.remove('open')
 }
 
 function addToHistory() {
@@ -343,3 +349,7 @@ function filterPayMode(){
     }
   })
 }
+
+navToggle.addEventListener('click',function(){
+  header.classList.toggle('open')
+})
