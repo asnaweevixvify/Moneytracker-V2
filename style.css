@@ -349,7 +349,7 @@ i{
     }
     .bg2 .topiclist li, .bg3 .topiclist li,
     .bg2 .itemlist li, .bg3 .itemlist li {
-        font-size: 16px;
+        font-size: 10px;
     }
     .filterconatin {
         display: flex;
