@@ -258,6 +258,9 @@ i{
     font-size: 20px;
     margin-top: -80px;
 }
+.header i{
+    display: none;
+}
 @media(max-width:450px){
     body{
         display: flex;
@@ -297,6 +300,7 @@ i{
         color: white;
     }
     .header i{
+        display: flex;
         position: absolute;
         right: 30px;
         top: 50px;
