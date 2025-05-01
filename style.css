@@ -66,6 +66,7 @@ li{
     margin-right: auto;
     margin-top: 5px;
     opacity: 0.2;
+    z-index: -999;
 }
 .earnpaycontain{
     display: flex;
