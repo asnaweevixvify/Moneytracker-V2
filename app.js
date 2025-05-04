@@ -19,6 +19,8 @@ let earnList = document.getElementById('earnlist');
 let payList = document.getElementById('paylist');
 let earnMoneyTotalEl = document.getElementById('earntotal');
 let payMoneyTotalEl = document.getElementById('paytotal');
+let earnMoneyTotalSplit = document.getElementById('earntotalsplit');
+let payMoneyTotalSplit = document.getElementById('paytotalsplit');
 let filterSelectEarn = document.getElementById('monthEarn')
 let filterSelectPay = document.getElementById('monthPay')
 const header = document.querySelector('.header');
@@ -53,8 +55,13 @@ window.onload=function(){
     }
   }
   updateChart()
+  let earnMoneySplit = earnMoneyTotal 
+  let payMoneySplit = payMoneyTotal
   earnMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
+  earnMoneyTotalSplit.innerHTML=`${Intl.NumberFormat().format(earnMoneySplit)}฿`;
   payMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
+  payMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(payMoneySplit)}฿`;
+
   callBgOne()
 }
 
@@ -101,6 +108,20 @@ function callBgOne() {
   bgFour.style.display = 'none';
   topicText.innerText = 'บันทึกรายรับรายจ่าย';
   header.classList.remove('open')
+  const listPayAll = bgThree.querySelectorAll('ul#paylist')
+  const listEarnAll = bgTwo.querySelectorAll('ul#earnlist')
+  payMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
+  earnMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
+
+  listPayAll.forEach(e=>{
+    e.style.display='flex'
+  })
+  listEarnAll.forEach(e=>{
+    e.style.display='flex'
+  })
+  filterSelectEarn.value='none'
+  filterSelectPay.value='none'
+
 }
 
 function callBgTwo() {
@@ -110,6 +131,19 @@ function callBgTwo() {
   bgFour.style.display = 'none';
   topicText.innerText = 'รายการรายรับ';
   header.classList.remove('open')
+  const listPayAll = bgThree.querySelectorAll('ul#paylist')
+  const listEarnAll = bgTwo.querySelectorAll('ul#earnlist')
+  payMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
+  earnMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
+  listPayAll.forEach(e=>{
+    e.style.display='flex'
+  })
+  listEarnAll.forEach(e=>{
+    e.style.display='flex'
+  })
+  filterSelectEarn.value='none'
+  filterSelectPay.value='none'
+
 }
 
 function callBgThree() {
@@ -119,6 +153,21 @@ function callBgThree() {
   bgFour.style.display = 'none';
   topicText.innerText = 'รายการรายจ่าย';
   header.classList.remove('open')
+  const listPayAll = bgThree.querySelectorAll('ul#paylist')
+  const listEarnAll = bgTwo.querySelectorAll('ul#earnlist')
+
+  payMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
+  earnMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
+
+  listPayAll.forEach(e=>{
+    e.style.display='flex'
+  })
+  listEarnAll.forEach(e=>{
+    e.style.display='flex'
+  })
+  filterSelectEarn.value='none'
+  filterSelectPay.value='none'
+
 }
 
 function callBgFour() {
@@ -128,6 +177,21 @@ function callBgFour() {
   bgFour.style.display = 'flex';
   topicText.innerText = 'เพิ่มรายการ';
   header.classList.remove('open')
+  const listPayAll = bgThree.querySelectorAll('ul#paylist')
+  const listEarnAll = bgTwo.querySelectorAll('ul#earnlist')
+
+  payMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
+  earnMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
+
+  listPayAll.forEach(e=>{
+    e.style.display='flex'
+  })
+  listEarnAll.forEach(e=>{
+    e.style.display='flex'
+  })
+  filterSelectEarn.value='none'
+  filterSelectPay.value='none'
+
 }
 
 function addToHistory() {
@@ -149,9 +213,18 @@ function addToHistory() {
       money: moneyType.value,
       cat: catType.value
     });
+    const dataToSend = {
+      date: dateType.value,
+      type: 'รายรับ',
+      name: nameType.value,
+      money: moneyType.value,
+      category: catType.value
+    };
     showListEarn(earnArr.length - 1);
     calEarn();
     resetDisplay();
+    saveMode()
+    sendToGoogleSheet(dataToSend);
   } else {
     payArr.push({
       date: dateType.value,
@@ -159,11 +232,30 @@ function addToHistory() {
       money: moneyType.value,
       cat: catType.value
     });
+    const dataToSend = {
+      date: dateType.value,
+      type: 'รายจ่าย',
+      name: nameType.value,
+      money: moneyType.value,
+      category: catType.value
+    };
     showListPay(payArr.length - 1);
     calPay();
     resetDisplay();
     saveMode()
+    sendToGoogleSheet(dataToSend);
+    
   }
+}
+function sendToGoogleSheet(data) {
+  fetch('https://script.google.com/macros/s/AKfycbwZ9PXWXnOXdQuI1_Cx8CIbzmjKHd7xB4YhIEwr_WIKs2Tnxcq8T8mVNSDmuHhQt5mP/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
 }
 
 function showListEarn(index) {
@@ -214,7 +306,9 @@ function calEarn() {
   } else {
     earnMoneyTotal += parseInt(moneyType.value);
   }
+  let earnMoneySplit = earnMoneyTotal 
   earnMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
+  earnMoneyTotalSplit.innerHTML=`${Intl.NumberFormat().format(earnMoneySplit)}฿`;
   updateChart()
   saveMode()
 }
@@ -225,7 +319,10 @@ function calPay() {
   } else {
     payMoneyTotal += parseInt(moneyType.value);
   }
+  let payMoneySplit = payMoneyTotal
   payMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
+  payMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(payMoneySplit)}฿`;
+
   updateChart()
   saveMode()
 }
@@ -258,6 +355,7 @@ function delListEarn(e) {
         let delMoney = parseInt(targetAll[2].innerText)
         earnMoneyTotal -= delMoney
         earnMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
+        earnMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(earnMoneyTotal)}฿`;
         updateChart()
         targetItem.remove();
         const delList = earnArr.findIndex(u=>
@@ -291,6 +389,7 @@ function delListPay(e) {
         let delMoney = parseInt(targetAll[2].innerText)
         payMoneyTotal -= delMoney
         payMoneyTotalEl.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
+        payMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(payMoneyTotal)}฿`;
         updateChart()
         targetItem.remove();
         const delList = payArr.findIndex(u=>
@@ -322,32 +421,62 @@ function filterEarnMode(){
   const listEarnAll = bgTwo.querySelectorAll('ul#earnlist')
   let monthSelect = Number(filterSelectEarn.value)
   listEarnAll.forEach((e)=>{
+    e.classList.remove('selected')
     let dateInner = e.firstElementChild.innerText
     let dateNew  = new Date(dateInner)
     let monthInner = dateNew.getMonth()
     if (monthInner === monthSelect) {
       e.style.display = 'flex'; 
+      e.classList.add('selected')
     }
     else {
       e.style.display = 'none';
     }
   })
+  const listEarnMonth = bgTwo.querySelectorAll('ul.selected')
+  let earnMoneySplitStart =0
+    listEarnMonth.forEach(e=>{
+      let allEarnMonth = e.childNodes[5].innerText
+      let earnMoneySplit = parseInt(allEarnMonth)
+      if(earnMoneySplitStart === 0){
+        earnMoneySplitStart = earnMoneySplit
+      }
+      else{
+        earnMoneySplitStart += earnMoneySplit
+      }
+    })
+    earnMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(earnMoneySplitStart)}฿`;
 }
 
 function filterPayMode(){
   const listPayAll = bgThree.querySelectorAll('ul#paylist')
   let monthSelect = Number(filterSelectPay.value)
   listPayAll.forEach((e)=>{
+    e.classList.remove('selected')
     let dateInner = e.firstElementChild.innerText
     let dateNew  = new Date(dateInner)
     let monthInner = dateNew.getMonth()
     if (monthInner === monthSelect) {
       e.style.display = 'flex'; 
+      e.classList.add('selected')
     }
     else {
       e.style.display = 'none';
     }
   })
+  const listPayMonth = bgThree.querySelectorAll('ul.selected')
+  let payMoneySplitStart =0
+    listPayMonth.forEach(e=>{
+      let allPayMonth = e.childNodes[5].innerText
+      let payMoneySplit = parseInt(allPayMonth)
+      if(payMoneySplitStart === 0){
+        payMoneySplitStart = payMoneySplit
+      }
+      else{
+        payMoneySplitStart += payMoneySplit
+      }
+    })
+    payMoneyTotalSplit.innerHTML = `${Intl.NumberFormat().format(payMoneySplitStart)}฿`;
 }
 
 navToggle.addEventListener('click',function(){
