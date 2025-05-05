@@ -200,7 +200,7 @@ function addToHistory() {
     icon: "success",
     draggable: true
   });
-  if(selected.value === 'none' || dateType.value === '' || nameType.value === '' || moneyType.value === '' || catType.value==='none'){
+  if(!isNaN(Number(nameType.value)) || isNaN(Number(moneyType.value)) || selected.value === 'none' || dateType.value === '' || nameType.value === '' || moneyType.value === '' || catType.value==='none'){
     Swal.fire({
       icon: "error",
       title: `<h3>โปรดกรอกข้อมูลให้ครบ<h3>`,
